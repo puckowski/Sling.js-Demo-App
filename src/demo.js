@@ -12,15 +12,21 @@ let compGrid = new GridComponent();
 s.mount('divGrid', compGrid);
 
 var columnDefs = [
-    { headerName: "Make", field: "make" },
-    { headerName: "Model", field: "model" },
-    { headerName: "Price", field: "price" }
-];
-
-var rowData = [
-    { make: "Toyota", model: "Celica", price: 35000 },
-    { make: "Ford", model: "Mondeo", price: 32000 },
-    { make: "Porsche", model: "Boxter", price: 72000 }
+    { headerName: 'Nomenclature', field: 'nomenclature' },
+    { headerName: 'MRP Type', field: 'mrpType' },
+    { headerName: 'Unit Cost New', field: 'unitCostNew' },
+    { headerName: 'Unit Cost Used', field: 'unitCostUsed' },
+    { headerName: 'Repairable', field: 'repairable' },
+    { headerName: 'Lead Time', field: 'leadTime' },
+    { headerName: 'Available Quantity', field: 'availableQuantity' },
+    { headerName: 'Totla Quantity', field: 'totalQuantity' },
+    { headerName: 'Shop Required Quantity', field: 'shopRequiredQuantity' },
+    { headerName: 'Bonded Quantity', field: 'bondedQuantity' },
+    { headerName: 'Forecast Quantity 90 Days', field: 'forcastQuantity90Days' },
+    { headerName: 'Reorder Point', field: 'reorderPoint' },
+    { headerName: 'Supplier Code', field: 'supplierCode' },
+    { headerName: 'Supplier Name', field: 'supplierName' },
+    { headerName: 'Part Health', field: 'partHealth' },
 ];
 
 var gridOptions = {
@@ -30,7 +36,6 @@ var gridOptions = {
         filter: true
     },
     columnDefs: columnDefs,
-    rowData: rowData,
     rowSelection: 'single',
     onSelectionChanged: onSelectionChanged
 };
@@ -54,11 +59,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var gridDiv = document.querySelector('#divGrid');
     new Grid(gridDiv, gridOptions);
 
-    s.request('https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/ag-grid/ag-grid/master/packages/ag-grid-docs/src/olympicWinnersSmall.json', 'GET', {
-    }).then(resp => {
-        var httpResult = JSON.parse(resp.response);
-        gridOptions.api.setRowData(httpResult);
-    });
+    s.get('https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/puckowski/Sling.js-Demo-App/master/src/assets/json/home-main-grid-data.json')
+        .then(resp => {
+            var httpResult = JSON.parse(resp.response);
+            gridOptions.api.setRowData(httpResult);
+        });
 
     autoSizeAll(false);
 });
