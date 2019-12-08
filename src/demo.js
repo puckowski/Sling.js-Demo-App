@@ -4,12 +4,22 @@ import { Grid } from '../node_modules/ag-grid-community/dist/ag-grid-community.m
 
 import NavbarComponent from './demo/components/navbar.component.js';
 import GridComponent from './demo/components/grid.component.js';
+import BottomSheetComponent from './demo/components/bottom-sheet.component.js';
+import StoreMain from './demo/store/main.store.js';
+
+let state = new StoreMain();
+s.setState(state);
 
 let compNavbar = new NavbarComponent();
 s.mount('divNavbar', compNavbar);
 
 let compGrid = new GridComponent();
 s.mount('divGrid', compGrid);
+
+let compBottomSheet = new BottomSheetComponent();
+s.mount('divBottomSheet', compBottomSheet);
+
+s.autoUpdate('divBottomSheet', compBottomSheet);
 
 var columnDefs = [
     { headerName: 'Nomenclature', field: 'nomenclature' },
@@ -53,6 +63,10 @@ function onSelectionChanged() {
     var selectedRows = gridOptions.api.getSelectedRows();
 
     console.log(selectedRows);
+
+    let state = s.getState();
+    state.setBottomSheetOpen(true);
+    s.setState(state);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
