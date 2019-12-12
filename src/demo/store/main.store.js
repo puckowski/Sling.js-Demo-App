@@ -9,6 +9,11 @@ class StoreMain {
 
     setBottomSheetOpen(newSheetState) {
         this.bottomSheetOpen = newSheetState;
+
+        if (newSheetState) {
+            let partSupply = s.route('part-supply');
+            s.autoUpdate('divSheetContent', partSupply);  
+        }
     }
 }
 

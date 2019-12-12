@@ -39,3 +39,18 @@
 .open {
     height: 90vh;
 }
+
+.bottom-sheet-controls {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bottom-sheet-controls i {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.bottom-sheet-content {
+    height: 100%;
+    overflow-y: auto;
+}

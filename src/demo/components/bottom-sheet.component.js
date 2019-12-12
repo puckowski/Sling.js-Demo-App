@@ -4,6 +4,18 @@ class BottomSheetComponent {
 
     }
 
+    closeBottomSheet() {
+        let state = s.getState();
+        state.setBottomSheetOpen(false);
+        s.setState(state);
+    }
+
+    slAfterInit() {
+        if (s.getRouteSegments().length > 0) {
+            s.getState().setBottomSheetOpen(true);    
+        }
+    }
+
     view() {
         let state = s.getState();
 
@@ -16,11 +28,22 @@ class BottomSheetComponent {
             children: [
                 s.markup('div', {
                     attrs: {
-
+                        class: 'bottom-sheet-controls'
                     },
                     children: [
-                        
+                        s.markup('i', {
+                            attrs: {
+                                class: 'fa fa-close',
+                                onclick: this.closeBottomSheet
+                            }
+                        })
                     ]
+                }),
+                s.markup('div', {
+                    attrs: {
+                        id: 'divSheetContent',
+                        class: 'bottom-sheet-content'
+                    }
                 })
             ]
         })

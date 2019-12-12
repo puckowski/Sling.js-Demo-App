@@ -23,3 +23,34 @@
         opacity: 0;
     }
 }
+
+.bottom-sheet {
+    width: 90vw;
+    height: 0vh;
+    margin: 0px 5vw;
+    background-color: #fafafa;
+    transition: ease 0.333s;
+    z-index: 2;
+    position: fixed;
+    bottom: 0px;
+    box-shadow: 0px 0px 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+.open {
+    height: 90vh;
+}
+
+.bottom-sheet-controls {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bottom-sheet-controls i {
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.bottom-sheet-content {
+    height: 100%;
+    overflow-y: auto;
+}

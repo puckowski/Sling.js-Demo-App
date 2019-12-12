@@ -6,6 +6,7 @@ import NavbarComponent from './demo/components/navbar.component.js';
 import GridComponent from './demo/components/grid.component.js';
 import BottomSheetComponent from './demo/components/bottom-sheet.component.js';
 import StoreMain from './demo/store/main.store.js';
+import PartSupplyComponent from './demo/components/part-supply.component.js';
 
 let state = new StoreMain();
 s.setState(state);
@@ -81,3 +82,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     autoSizeAll(false);
 });
+
+s.addRoute('part-supply', { component: new PartSupplyComponent(), root: 'divSheetContent' });
