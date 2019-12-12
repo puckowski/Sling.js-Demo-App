@@ -8,6 +8,7 @@ class BottomSheetComponent {
         let state = s.getState();
         state.setBottomSheetOpen(false);
         s.setState(state);
+        s.route('');
     }
 
     slAfterInit() {

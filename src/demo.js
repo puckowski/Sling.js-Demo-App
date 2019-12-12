@@ -84,3 +84,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 s.addRoute('part-supply', { component: new PartSupplyComponent(), root: 'divSheetContent' });
+s.addRoute('', { component: null, root: 'divSheetContent' });
