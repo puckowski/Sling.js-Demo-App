@@ -1,3 +1,5 @@
+import SelectedPartHeaderComponent from "./selected-part-header.component";
+
 const MOCK_DATA_MAX_VALUE_EXCLUSIVE = 101;
 const MOCK_DATA_MONTH_RANGE = 24;
 
@@ -59,6 +61,7 @@ class PartSupplyComponent {
                 noTouch: 'true'
             },
             children: [
+                new SelectedPartHeaderComponent().view(),
                 s.markup('div', {
                     attrs: {
                         id: 'myDiv',

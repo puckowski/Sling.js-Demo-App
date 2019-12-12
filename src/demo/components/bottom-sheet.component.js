@@ -11,12 +11,6 @@ class BottomSheetComponent {
         s.route('');
     }
 
-    slAfterInit() {
-        if (s.getRouteSegments().length > 0) {
-            s.getState().setBottomSheetOpen(true);    
-        }
-    }
-
     view() {
         let state = s.getState();
 

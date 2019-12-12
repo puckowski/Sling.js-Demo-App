@@ -23,6 +23,7 @@ s.mount('divBottomSheet', compBottomSheet);
 s.autoUpdate('divBottomSheet', compBottomSheet);
 
 var columnDefs = [
+    { headerName: 'Part Number', field: 'partNumber' },
     { headerName: 'Nomenclature', field: 'nomenclature' },
     { headerName: 'MRP Type', field: 'mrpType' },
     { headerName: 'Unit Cost New', field: 'unitCostNew' },
@@ -61,11 +62,12 @@ function autoSizeAll(skipHeader) {
 }
 
 function onSelectionChanged() {
-    var selectedRows = gridOptions.api.getSelectedRows();
+    let selectedRows = gridOptions.api.getSelectedRows();
 
     console.log(selectedRows);
 
     let state = s.getState();
+    state.setSelectedRow(selectedRows);
     state.setBottomSheetOpen(true);
     s.setState(state);
 }
@@ -74,14 +76,32 @@ document.addEventListener('DOMContentLoaded', function () {
     var gridDiv = document.querySelector('#divGrid');
     new Grid(gridDiv, gridOptions);
 
+    let newState = s.getState();
+    newState.setGridOptions(gridOptions)
+    s.setState(newState);
+
     s.get('https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/puckowski/Sling.js-Demo-App/master/src/assets/json/home-main-grid-data.json')
         .then(resp => {
             var httpResult = JSON.parse(resp.response);
             gridOptions.api.setRowData(httpResult);
+
+            if (s.getRouteSegments().length > 0) {
+                let state = s.getState();
+                let urlSegments = s.getRouteSegments();
+    
+                state.getGridOptions().api.forEachNode(function(rowNode) {
+                    if (rowNode.data.partNumber === urlSegments[1]) {
+                        state.setSelectedRow([rowNode.data]);
+                        s.setState(state);
+                    }
+                });
+    
+                s.getState().setBottomSheetOpen(true);    
+            }
         });
 
     autoSizeAll(false);
 });
 
-s.addRoute('part-supply', { component: new PartSupplyComponent(), root: 'divSheetContent' });
+s.addRoute('part-supply/:partNumber', { component: new PartSupplyComponent(), root: 'divSheetContent' });
 s.addRoute('', { component: null, root: 'divSheetContent' });
