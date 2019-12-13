@@ -45,16 +45,36 @@ class GridService {
             newState.setGridOptions(this.gridOptions)
             s.setState(newState);
     
+            let gridDataStream = this.getMainGridDataStream();
+
             s.get('https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/puckowski/Sling.js-Demo-App/master/src/assets/json/home-main-grid-data.json')
                 .then(resp => {
                     var httpResult = JSON.parse(resp.response);
-                    this.gridOptions.api.setRowData(httpResult);
+                    gridDataStream.from(httpResult);
+                    this.gridOptions.api.setRowData(gridDataStream.getData());
     
                     this.navigateToRouteIfNeeded();
                 });
     
             this.autoSizeAll(false);
         }.bind(this));
+    }
+
+    getMainGridDataStream() {
+        let gridDataStream = s.Stream();
+            gridDataStream.transform(function(arr) {
+                return arr.map(val => {
+                    if (val.unitCostNew)
+                        val.unitCostNew = '$' + val.unitCostNew;
+                    
+                    if (val.unitCostUsed)
+                        val.unitCostUsed = '$' + val.unitCostUsed;
+
+                    return val;
+                });
+            });
+        
+        return gridDataStream;
     }
 
     autoSizeAll(skipHeader) {
