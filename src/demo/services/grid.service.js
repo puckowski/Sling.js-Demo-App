@@ -9,7 +9,7 @@ const COLUMN_DEFINITIONS = [
     { headerName: 'Repairable', field: 'repairable' },
     { headerName: 'Lead Time', field: 'leadTime' },
     { headerName: 'Available Quantity', field: 'availableQuantity' },
-    { headerName: 'Totla Quantity', field: 'totalQuantity' },
+    { headerName: 'Total Quantity', field: 'totalQuantity' },
     { headerName: 'Shop Required Quantity', field: 'shopRequiredQuantity' },
     { headerName: 'Bonded Quantity', field: 'bondedQuantity' },
     { headerName: 'Forecast Quantity 90 Days', field: 'forcastQuantity90Days' },
