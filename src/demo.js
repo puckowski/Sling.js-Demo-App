@@ -1,12 +1,11 @@
 import 'bootstrap';
 
-import { Grid } from '../node_modules/ag-grid-community/dist/ag-grid-community.min.noStyle.js';
-
 import NavbarComponent from './demo/components/navbar.component.js';
 import GridComponent from './demo/components/grid.component.js';
 import BottomSheetComponent from './demo/components/bottom-sheet.component.js';
 import StoreMain from './demo/store/main.store.js';
 import PartSupplyComponent from './demo/components/part-supply.component.js';
+import GridService from './demo/services/grid.service.js';
 
 let state = new StoreMain();
 s.setState(state);
@@ -20,88 +19,10 @@ s.mount('divGrid', compGrid);
 let compBottomSheet = new BottomSheetComponent();
 s.mount('divBottomSheet', compBottomSheet);
 
+let gridService = new GridService();
+gridService.init();
+
 s.autoUpdate('divBottomSheet', compBottomSheet);
 
-var columnDefs = [
-    { headerName: 'Part Number', field: 'partNumber' },
-    { headerName: 'Nomenclature', field: 'nomenclature' },
-    { headerName: 'MRP Type', field: 'mrpType' },
-    { headerName: 'Unit Cost New', field: 'unitCostNew' },
-    { headerName: 'Unit Cost Used', field: 'unitCostUsed' },
-    { headerName: 'Repairable', field: 'repairable' },
-    { headerName: 'Lead Time', field: 'leadTime' },
-    { headerName: 'Available Quantity', field: 'availableQuantity' },
-    { headerName: 'Totla Quantity', field: 'totalQuantity' },
-    { headerName: 'Shop Required Quantity', field: 'shopRequiredQuantity' },
-    { headerName: 'Bonded Quantity', field: 'bondedQuantity' },
-    { headerName: 'Forecast Quantity 90 Days', field: 'forcastQuantity90Days' },
-    { headerName: 'Reorder Point', field: 'reorderPoint' },
-    { headerName: 'Supplier Code', field: 'supplierCode' },
-    { headerName: 'Supplier Name', field: 'supplierName' },
-    { headerName: 'Part Health', field: 'partHealth' },
-];
-
-var gridOptions = {
-    defaultColDef: {
-        resizable: true,
-        sortable: true,
-        filter: true
-    },
-    columnDefs: columnDefs,
-    rowSelection: 'single',
-    onSelectionChanged: onSelectionChanged
-};
-
-function autoSizeAll(skipHeader) {
-    var allColumnIds = [];
-    gridOptions.columnApi.getAllColumns().forEach(function (column) {
-        allColumnIds.push(column.colId);
-    });
-
-    gridOptions.columnApi.autoSizeColumns(allColumnIds, skipHeader);
-}
-
-function onSelectionChanged() {
-    let selectedRows = gridOptions.api.getSelectedRows();
-
-    console.log(selectedRows);
-
-    let state = s.getState();
-    state.setSelectedRow(selectedRows);
-    state.setBottomSheetOpen(true);
-    s.setState(state);
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    var gridDiv = document.querySelector('#divGrid');
-    new Grid(gridDiv, gridOptions);
-
-    let newState = s.getState();
-    newState.setGridOptions(gridOptions)
-    s.setState(newState);
-
-    s.get('https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/puckowski/Sling.js-Demo-App/master/src/assets/json/home-main-grid-data.json')
-        .then(resp => {
-            var httpResult = JSON.parse(resp.response);
-            gridOptions.api.setRowData(httpResult);
-
-            if (s.getRouteSegments().length > 0) {
-                let state = s.getState();
-                let urlSegments = s.getRouteSegments();
-    
-                state.getGridOptions().api.forEachNode(function(rowNode) {
-                    if (rowNode.data.partNumber === urlSegments[1]) {
-                        state.setSelectedRow([rowNode.data]);
-                        s.setState(state);
-                    }
-                });
-    
-                s.getState().setBottomSheetOpen(true);    
-            }
-        });
-
-    autoSizeAll(false);
-});
-
 s.addRoute('part-supply/:partNumber', { component: new PartSupplyComponent(), root: 'divSheetContent' });
-s.addRoute('', { component: null, root: 'divSheetContent' });
+s.addRoute('', { root: 'divSheetContent' });
