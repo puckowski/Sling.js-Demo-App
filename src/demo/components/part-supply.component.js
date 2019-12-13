@@ -50,7 +50,7 @@ class PartSupplyComponent {
 
     slAfterInit() {
         if (document.getElementById('myDiv')) {
-            Plotly.newPlot('myDiv', this.data);
+            Plotly.newPlot('myDiv', this.data, { }, { responsive: true, displaylogo: false });
         }
     }
 
