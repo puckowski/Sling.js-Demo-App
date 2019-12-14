@@ -91,6 +91,7 @@ class GridService {
 
         let state = s.getState();
         state.setSelectedRow(selectedRows);
+        s.route('part-supply/' + selectedRows[0].partNumber);
         state.setBottomSheetOpen(true);
         s.setState(state);
     }
@@ -107,7 +108,8 @@ class GridService {
                 }
             });
 
-            s.getState().setBottomSheetOpen(true);
+            state.setBottomSheetOpen(true);
+            s.setState(state);
         }
     }
 }

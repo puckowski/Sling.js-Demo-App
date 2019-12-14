@@ -1,14 +1,39 @@
 class BottomSheetComponent {
 
     constructor() {
+        this.oldSheetState = false;
+    }
 
+    slOnInit() {
+        s.getState().getBottomSheetSubject().subscribe(function(newSheetState) {
+            if (newSheetState !== this.oldSheetState) {
+                let segments = s.getRouteSegments();
+
+                switch(segments[0]) {
+                    case 'part-supply': {
+                        let partSupply = s.route('part-supply/' + s.getState().getSelectedRow().partNumber);
+                        s.autoUpdate('divSheetContent', partSupply); 
+
+                        break;
+                    }
+                    case 'about': {
+                        let about = s.route('about');
+                        s.autoUpdate('divSheetContent', about); 
+
+                        break;
+                    }
+                }
+                
+                this.oldSheetState = newSheetState;
+            }
+        }.bind(this));
     }
 
     closeBottomSheet() {
         let state = s.getState();
+        s.route('');
         state.setBottomSheetOpen(false);
         s.setState(state);
-        s.route('');
     }
 
     view() {

@@ -1,10 +1,13 @@
 class StoreMain {
+
     constructor() {
-        this.bottomSheetOpen = false;
+        //this.bottomSheetOpen = false;
+        this.bottomSheetSubject = s.BehaviorSubject(false);
         this.selectedRow = null;
         this.gridOptions = null;
     }
 
+    /*
     getBottomSheetOpen() {
         return this.bottomSheetOpen;
     }
@@ -16,6 +19,19 @@ class StoreMain {
             let partSupply = s.route('part-supply/' + this.selectedRow.partNumber);
             s.autoUpdate('divSheetContent', partSupply);  
         }
+    }
+    */
+
+    getBottomSheetSubject() {
+        return this.bottomSheetSubject;
+    }
+
+    setBottomSheetOpen(newState) {
+        this.bottomSheetSubject.next(newState);
+    }
+
+    getBottomSheetOpen() {
+        return this.bottomSheetSubject.getData() === true;
     }
 
     getSelectedRow() {

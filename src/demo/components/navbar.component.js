@@ -1,7 +1,40 @@
 class NavbarComponent {
 
     constructor() {
+        this.route = '';
+    }
 
+    slOnInit() {
+       let routeObservable = s.Observable(s.getRouteSegments());
+       routeObservable.subscribe(function(arr) {
+            if (arr.length > 0) {
+                this.route = arr[0];
+            }
+            else {
+                this.route = '';
+            }
+       }.bind(this));
+    }
+
+    navigate(routeString) {
+        s.route(routeString);
+
+        switch(routeString) {
+            case 'about': {
+                let state = s.getState();
+                state.setBottomSheetOpen(true);
+                s.setState(state);
+
+                break;
+            }
+            case '': {
+                let state = s.getState();
+                state.setBottomSheetOpen(false);
+                s.setState(state);
+            }
+        }
+
+        this.route = routeString;
     }
 
     view() {
@@ -55,11 +88,34 @@ class NavbarComponent {
                                     children: [
                                         s.markup('a', {
                                             attrs: {
-                                                class: 'nav-item nav-link active',
-                                                href: '#'
+                                                ...this.route === '' && { class: 'nav-item nav-link active' },
+                                                ...this.route !== '' && { class: 'nav-item nav-link' },
+                                                onclick: this.navigate.bind(this, ''),
+                                                style: 'cursor:pointer;'
                                             },
                                             children: [
                                                 s.textNode('Home')
+                                            ]
+                                        }),
+                                        s.markup('a', {
+                                            attrs: {
+                                                ...this.route === 'part-supply' && { class: 'nav-item nav-link active' },
+                                                ...this.route !== 'part-supply' && { class: 'nav-item nav-link' },
+                                                style: 'cursor:pointer;'
+                                            },
+                                            children: [
+                                                s.textNode('Part Supply')
+                                            ]
+                                        }),
+                                        s.markup('a', {
+                                            attrs: {
+                                                ...this.route === 'about' && { class: 'nav-item nav-link active' },
+                                                ...this.route !== 'about' && { class: 'nav-item nav-link' },
+                                                onclick: this.navigate.bind(this, 'about'),
+                                                style: 'cursor:pointer;'
+                                            },
+                                            children: [
+                                                s.textNode('About')
                                             ]
                                         })
                                     ]

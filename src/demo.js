@@ -6,6 +6,7 @@ import BottomSheetComponent from './demo/components/bottom-sheet.component.js';
 import StoreMain from './demo/store/main.store.js';
 import PartSupplyComponent from './demo/components/part-supply.component.js';
 import GridService from './demo/services/grid.service.js';
+import AboutAppComponent from './demo/components/about-app.component.js';
 
 let state = new StoreMain();
 s.setState(state);
@@ -23,6 +24,8 @@ let gridService = new GridService();
 gridService.init();
 
 s.autoUpdate('divBottomSheet', compBottomSheet);
+s.autoUpdate('divNavbar', compNavbar);
 
 s.addRoute('part-supply/:partNumber', { component: new PartSupplyComponent(), root: 'divSheetContent' });
+s.addRoute('about', { component: new AboutAppComponent(), root: 'divSheetContent' });
 s.addRoute('', { root: 'divSheetContent' });
