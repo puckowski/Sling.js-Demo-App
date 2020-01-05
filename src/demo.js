@@ -15,16 +15,13 @@ let compNavbar = new NavbarComponent();
 s.mount('divNavbar', compNavbar);
 
 let compGrid = new GridComponent();
-s.mount('divGrid', compGrid);
+s.mount('divGrid', compGrid, s.CHANGE_DETECTOR_DETACHED);
 
 let compBottomSheet = new BottomSheetComponent();
 s.mount('divBottomSheet', compBottomSheet);
 
 let gridService = new GridService();
 gridService.init();
-
-s.autoUpdate('divBottomSheet', compBottomSheet);
-s.autoUpdate('divNavbar', compNavbar);
 
 s.addRoute('part-supply/:partNumber', { component: new PartSupplyComponent(), root: 'divSheetContent' });
 s.addRoute('about', { component: new AboutAppComponent(), root: 'divSheetContent' });

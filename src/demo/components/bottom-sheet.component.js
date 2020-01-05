@@ -11,14 +11,14 @@ class BottomSheetComponent {
 
                 switch(segments[0]) {
                     case 'part-supply': {
-                        let partSupply = s.route('part-supply/' + s.getState().getSelectedRow().partNumber);
-                        s.autoUpdate('divSheetContent', partSupply); 
+                        s.route('part-supply/' + s.getState().getSelectedRow().partNumber);
+                        //s.autoUpdate('divSheetContent', partSupply); 
 
                         break;
                     }
                     case 'about': {
-                        let about = s.route('about');
-                        s.autoUpdate('divSheetContent', about); 
+                        s.route('about');
+                        //s.autoUpdate('divSheetContent', about); 
 
                         break;
                     }
@@ -62,7 +62,8 @@ class BottomSheetComponent {
                 s.markup('div', {
                     attrs: {
                         id: 'divSheetContent',
-                        class: 'bottom-sheet-content'
+                        class: 'bottom-sheet-content',
+                        slUseExisting: 'true'
                     }
                 })
             ]

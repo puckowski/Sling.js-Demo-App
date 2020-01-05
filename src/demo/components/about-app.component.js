@@ -7,7 +7,7 @@ class AboutAppComponent {
     view() {
         return s.markup('div', {
             attrs: {
-                
+                id: 'divSheetContent'
             },
             children: [
                 s.markup('div', {

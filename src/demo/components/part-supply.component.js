@@ -57,15 +57,14 @@ class PartSupplyComponent {
     view() {
         return s.markup('div', {
             attrs: {
-                id: 'divSheetContent',
-                noTouch: 'true'
+                id: 'divSheetContent'
             },
             children: [
                 new SelectedPartHeaderComponent().view(),
                 s.markup('div', {
                     attrs: {
                         id: 'myDiv',
-                        noTouch: 'true'
+                        slUseExisting: 'true'
                     }
                 })
             ]

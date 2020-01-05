@@ -47,7 +47,7 @@ class GridService {
     
             let gridDataStream = this.getMainGridDataStream();
 
-            s.get('https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/puckowski/Sling.js-Demo-App/master/src/assets/json/home-main-grid-data.json')
+            s.get('assets/json/home-main-grid-data.json')
                 .then(resp => {
                     var httpResult = JSON.parse(resp.response);
                     gridDataStream.from(httpResult);
