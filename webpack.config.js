@@ -36,7 +36,8 @@ var config = {
             { from: './*.html', to: '' },
             { from: './images', to: 'images' },
             { from: './css', to: '' },
-            { from: './js', to: '' }
+            { from: './js', to: '' },
+            { from: './assets', to: 'assets' }
         ]),
     ]
 };
