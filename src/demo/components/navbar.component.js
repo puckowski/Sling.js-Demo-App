@@ -1,3 +1,7 @@
+import { route, getRouteSegments } from '../../js/sling-router.min'
+import { markup, getState, textNode, setState } from '../../js/sling.min'
+import { Observable } from '../../js/sling-reactive.min'
+
 class NavbarComponent {
 
     constructor() {
@@ -5,7 +9,7 @@ class NavbarComponent {
     }
 
     slOnInit() {
-       let routeObservable = s.Observable(s.getRouteSegments());
+       let routeObservable = Observable(getRouteSegments());
        routeObservable.subscribe(function(arr) {
             if (arr.length > 0) {
                 this.route = arr[0];
@@ -17,20 +21,20 @@ class NavbarComponent {
     }
 
     navigate(routeString) {
-        s.route(routeString);
+        route(routeString);
 
         switch(routeString) {
             case 'about': {
-                let state = s.getState();
+                let state = getState();
                 state.setBottomSheetOpen(true);
-                s.setState(state);
+                setState(state);
 
                 break;
             }
             case '': {
-                let state = s.getState();
+                let state = getState();
                 state.setBottomSheetOpen(false);
-                s.setState(state);
+                setState(state);
             }
         }
 
@@ -38,26 +42,26 @@ class NavbarComponent {
     }
 
     view() {
-        return s.markup('div', {
+        return markup('div', {
             attrs: {
                 id: 'divNavbar'
             }, 
             children: [
-                s.markup('nav', {
+                markup('nav', {
                     attrs: {
                         class: 'navbar navbar-expand-lg navbar-light bg-light'
                     },
                     children: [
-                        s.markup('a', {
+                        markup('a', {
                             attrs: {
                                 class: 'navbar-brand',
                                 href: '#'
                             },
                             children: [
-                                s.textNode('Demo App')
+                                textNode('Demo App')
                             ]
                         }),
-                        s.markup('button', {
+                        markup('button', {
                             attrs: {
                                 class: 'navbar-toggler',
                                 type: 'button',
@@ -68,25 +72,25 @@ class NavbarComponent {
                                 "aria-label": 'Toggle navigation'
                             },
                             children: [
-                                s.markup('span', {
+                                markup('span', {
                                     attrs: {
                                         class: 'navbar-toggler-icon'
                                     }
                                 })
                             ]
                         }),
-                        s.markup('div', {
+                        markup('div', {
                             attrs: {
                                 class: 'collapse navbar-collapse',
                                 id: 'navbarNavAltMarkup'
                             },
                             children: [
-                                s.markup('div', {
+                                markup('div', {
                                     attrs: {
                                         class: 'navbar-nav'
                                     },
                                     children: [
-                                        s.markup('a', {
+                                        markup('a', {
                                             attrs: {
                                                 ...this.route === '' && { class: 'nav-item nav-link active' },
                                                 ...this.route !== '' && { class: 'nav-item nav-link' },
@@ -94,20 +98,20 @@ class NavbarComponent {
                                                 style: 'cursor:pointer;'
                                             },
                                             children: [
-                                                s.textNode('Home')
+                                                textNode('Home')
                                             ]
                                         }),
-                                        s.markup('a', {
+                                        markup('a', {
                                             attrs: {
                                                 ...this.route === 'part-supply' && { class: 'nav-item nav-link active' },
                                                 ...this.route !== 'part-supply' && { class: 'nav-item nav-link' },
                                                 style: 'cursor:pointer;'
                                             },
                                             children: [
-                                                s.textNode('Part Supply')
+                                                textNode('Part Supply')
                                             ]
                                         }),
-                                        s.markup('a', {
+                                        markup('a', {
                                             attrs: {
                                                 ...this.route === 'about' && { class: 'nav-item nav-link active' },
                                                 ...this.route !== 'about' && { class: 'nav-item nav-link' },
@@ -115,7 +119,7 @@ class NavbarComponent {
                                                 style: 'cursor:pointer;'
                                             },
                                             children: [
-                                                s.textNode('About')
+                                                textNode('About')
                                             ]
                                         })
                                     ]

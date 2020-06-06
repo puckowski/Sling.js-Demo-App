@@ -1,3 +1,5 @@
+import { markup, getState, textNode } from '../../js/sling.min'
+
 class SelectedPartHeaderComponent {
 
     constructor() {
@@ -5,19 +7,19 @@ class SelectedPartHeaderComponent {
     }
 
     view() {
-        let state = s.getState();
+        let state = getState();
 
-        return s.markup('div', {
+        return markup('div', {
             attrs: {
 
             },
             children: [
-                s.markup('div', {
+                markup('div', {
                     attrs: {
                         style: 'padding:0px 1rem;font-size:24px;'
                     },
                     children: [
-                        s.textNode(state.getSelectedRow().partNumber + ' - ' + state.getSelectedRow().nomenclature)
+                        textNode(state.getSelectedRow().partNumber + ' - ' + state.getSelectedRow().nomenclature)
                     ]
                 })
             ]

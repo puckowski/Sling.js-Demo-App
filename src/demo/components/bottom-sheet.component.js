@@ -1,3 +1,6 @@
+import { markup, getState } from '../../js/sling.min'
+import { route, getRouteSegments } from '../../js/sling-router.min';
+
 class BottomSheetComponent {
 
     constructor() {
@@ -5,20 +8,18 @@ class BottomSheetComponent {
     }
 
     slOnInit() {
-        s.getState().getBottomSheetSubject().subscribe(function(newSheetState) {
+        getState().getBottomSheetSubject().subscribe(function(newSheetState) {
             if (newSheetState !== this.oldSheetState) {
-                let segments = s.getRouteSegments();
+                let segments = getRouteSegments();
 
                 switch(segments[0]) {
                     case 'part-supply': {
-                        s.route('part-supply/' + s.getState().getSelectedRow().partNumber);
-                        //s.autoUpdate('divSheetContent', partSupply); 
+                        route('part-supply/' + getState().getSelectedRow().partNumber);
 
                         break;
                     }
                     case 'about': {
-                        s.route('about');
-                        //s.autoUpdate('divSheetContent', about); 
+                        route('about');
 
                         break;
                     }
@@ -30,28 +31,28 @@ class BottomSheetComponent {
     }
 
     closeBottomSheet() {
-        let state = s.getState();
-        s.route('');
+        let state = getState();
+        route('');
         state.setBottomSheetOpen(false);
-        s.setState(state);
+        setState(state);
     }
 
     view() {
-        let state = s.getState();
+        let state = getState();
 
-        return s.markup('div', {
+        return markup('div', {
             attrs: {
                 id: 'divBottomSheet',
                 ...state.getBottomSheetOpen() === false && { class: 'bottom-sheet' },
                 ...state.getBottomSheetOpen() === true && { class: 'bottom-sheet open' },
             },
             children: [
-                s.markup('div', {
+                markup('div', {
                     attrs: {
                         class: 'bottom-sheet-controls'
                     },
                     children: [
-                        s.markup('i', {
+                        markup('i', {
                             attrs: {
                                 class: 'fa fa-close',
                                 onclick: this.closeBottomSheet
@@ -59,7 +60,7 @@ class BottomSheetComponent {
                         })
                     ]
                 }),
-                s.markup('div', {
+                markup('div', {
                     attrs: {
                         id: 'divSheetContent',
                         class: 'bottom-sheet-content',

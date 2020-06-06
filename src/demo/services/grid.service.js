@@ -1,4 +1,8 @@
 import { Grid } from '../../../node_modules/ag-grid-community/dist/ag-grid-community.min.noStyle.js';
+import { setState, getState } from '../../js/sling.min';
+import { slGet } from '../../js/sling-xhr.min';
+import { Stream } from '../../js/sling-reactive.min';
+import { route, getRouteSegments } from '../../js/sling-router.min';
 
 const COLUMN_DEFINITIONS = [
     { headerName: 'Part Number', field: 'partNumber' },
@@ -41,13 +45,13 @@ class GridService {
             let gridDiv = document.querySelector('#divGrid');
             new Grid(gridDiv, this.gridOptions);
     
-            let newState = s.getState();
+            let newState = getState();
             newState.setGridOptions(this.gridOptions)
-            s.setState(newState);
+            setState(newState);
     
             let gridDataStream = this.getMainGridDataStream();
 
-            s.get('assets/json/home-main-grid-data.json')
+            slGet('assets/json/home-main-grid-data.json')
                 .then(resp => {
                     var httpResult = JSON.parse(resp.response);
                     gridDataStream.from(httpResult);
@@ -61,7 +65,7 @@ class GridService {
     }
 
     getMainGridDataStream() {
-        let gridDataStream = s.Stream();
+        let gridDataStream = Stream();
             gridDataStream.transform(function(arr) {
                 return arr.map(val => {
                     if (val.unitCostNew)
@@ -89,27 +93,27 @@ class GridService {
     onSelectionChanged() {
         let selectedRows = this.gridOptions.api.getSelectedRows();
 
-        let state = s.getState();
+        let state = getState();
         state.setSelectedRow(selectedRows);
-        s.route('part-supply/' + selectedRows[0].partNumber);
+        route('part-supply/' + selectedRows[0].partNumber);
         state.setBottomSheetOpen(true);
-        s.setState(state);
+        setState(state);
     }
 
     navigateToRouteIfNeeded() {
-        if (s.getRouteSegments().length > 0) {
-            let state = s.getState();
-            let urlSegments = s.getRouteSegments();
+        if (getRouteSegments().length > 0) {
+            let state = getState();
+            let urlSegments = getRouteSegments();
 
             state.getGridOptions().api.forEachNode(function (rowNode) {
                 if (rowNode.data.partNumber === urlSegments[1]) {
                     state.setSelectedRow([rowNode.data]);
-                    s.setState(state);
+                    setState(state);
                 }
             });
 
             state.setBottomSheetOpen(true);
-            s.setState(state);
+            setState(state);
         }
     }
 }

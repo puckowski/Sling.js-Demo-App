@@ -1,4 +1,5 @@
 import SelectedPartHeaderComponent from "./selected-part-header.component";
+import { markup } from '../../js/sling.min'
 
 const MOCK_DATA_MAX_VALUE_EXCLUSIVE = 101;
 const MOCK_DATA_MONTH_RANGE = 24;
@@ -55,13 +56,13 @@ class PartSupplyComponent {
     }
 
     view() {
-        return s.markup('div', {
+        return markup('div', {
             attrs: {
                 id: 'divSheetContent'
             },
             children: [
                 new SelectedPartHeaderComponent().view(),
-                s.markup('div', {
+                markup('div', {
                     attrs: {
                         id: 'myDiv',
                         slUseExisting: 'true'

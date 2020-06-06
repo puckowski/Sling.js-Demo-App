@@ -1,3 +1,5 @@
+import { markup } from '../../js/sling.min'
+
 class GridComponent {
 
     constructor() {
@@ -5,7 +7,7 @@ class GridComponent {
     }
 
     view() {
-        return s.markup('div', {
+        return markup('div', {
             attrs: {
                 id: 'divGrid',
                 style: 'height: calc(100% - 56px);width:100%;',

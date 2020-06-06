@@ -1,7 +1,9 @@
+import { BehaviorSubject } from '../../js/sling-reactive.min';
+
 class StoreMain {
 
     constructor() {
-        this.bottomSheetSubject = s.BehaviorSubject(false);
+        this.bottomSheetSubject = BehaviorSubject(false);
         this.selectedRow = null;
         this.gridOptions = null;
     }
