@@ -1,5 +1,7 @@
 # Sling.js Demo SPA
 
+![Sling demo app screenshot](https://github.com/puckowski/Sling.js-Demo-App/blob/master/src/assets/images/Demo_App_Screenshot_1.PNG "Sling demo app screenshot")
+
 Demo SPA built using Sling.js framework ([Sling.js on GitHub](https://github.com/puckowski/Sling.js)).
 
 ## Building
