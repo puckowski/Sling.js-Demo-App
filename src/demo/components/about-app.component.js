@@ -19,7 +19,7 @@ class AboutAppComponent {
                     children: [
                         textNode('This is a demo SPA created using the Sling.js JavaScript framework by Daniel Puckowski.'),
                         markup('br'),
-                        textNode('Using Sling.js version ' + s.version),
+                        textNode('Using Sling.js version ' + s.VERSION),
                         markup('br'),
                         markup('a', {
                             attrs: {
