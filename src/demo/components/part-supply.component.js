@@ -11,29 +11,33 @@ class PartSupplyComponent {
     }
 
     formatMockDate(dateToFormat) {
-        return dateToFormat.getMonth() + '/' + dateToFormat.getDate() + '/' + dateToFormat.getFullYear();
+        if (dateToFormat.getMonth() === 0) {
+            return '12/' + dateToFormat.getDate() + '/' + dateToFormat.getFullYear();
+        } else {
+            return dateToFormat.getMonth() + '/' + dateToFormat.getDate() + '/' + dateToFormat.getFullYear();
+        }
+    }
+
+    getMockYData(targetMonths) {
+        const mockYData = [];
+
+        for (let i = 0; i < targetMonths; ++i) {
+            // Random [0 - 100]
+            mockYData.push(Math.floor(Math.random() * MOCK_DATA_MAX_VALUE_EXCLUSIVE));
+        }
+
+        return mockYData;
     }
 
     getMockXData(targetMonths) {
-        const mockYData = [];
+        const mockXData = [];
         const currentDate = new Date();
 
         currentDate.setMonth(currentDate.getMonth() - targetMonths);
 
         for (let i = 0; i < targetMonths; ++i) {
             currentDate.setMonth(currentDate.getMonth() + 1);
-            mockYData.push(this.formatMockDate(currentDate));
-        }
-
-        return mockYData;
-    }
-
-    getMockYData(targetMonths) {
-        const mockXData = [];
-
-        for (let i = 0; i < targetMonths; ++i) {
-            // Random [0 - 100]
-            mockXData.push(Math.floor(Math.random() * MOCK_DATA_MAX_VALUE_EXCLUSIVE));
+            mockXData.push(this.formatMockDate(currentDate));
         }
 
         return mockXData;
