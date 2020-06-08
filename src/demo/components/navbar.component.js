@@ -44,7 +44,8 @@ class NavbarComponent {
     view() {
         return markup('div', {
             attrs: {
-                id: 'divNavbar'
+                id: 'divNavbar',
+                slUseExisting: 'true'
             }, 
             children: [
                 markup('nav', {
