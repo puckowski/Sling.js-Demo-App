@@ -54,8 +54,8 @@ class PartSupplyComponent {
     }
 
     slAfterInit() {
-        if (document.getElementById('myDiv')) {
-            Plotly.newPlot('myDiv', this.data, { }, { responsive: true, displaylogo: false });
+        if (document.getElementById('chartDiv')) {
+            Plotly.newPlot('chartDiv', this.data, { }, { responsive: true, displaylogo: false });
         }
     }
 
@@ -68,7 +68,7 @@ class PartSupplyComponent {
                 new SelectedPartHeaderComponent().view(),
                 markup('div', {
                     attrs: {
-                        id: 'myDiv',
+                        id: 'chartDiv',
                         slUseExisting: 'true'
                     }
                 })
