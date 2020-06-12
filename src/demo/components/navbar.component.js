@@ -8,22 +8,79 @@ class NavbarComponent {
         this.route = '';
     }
 
+    applyNavbarClassesForHome() {
+        document.querySelectorAll('.nav-item').forEach((node, index) => {
+            if (node.firstElementChild) {
+                switch (node.firstElementChild.innerText) {
+                    case 'Home': {
+                        node.classList.add('active');
+
+                        break;
+                    }
+                    default: {
+                        node.classList.remove('active');
+
+                        break;
+                    }
+                }
+            }
+        });
+    }
+
+    applyNavbarClassesForRoute(arr) {
+        document.querySelectorAll('.nav-item').forEach((node, index) => {
+            if (node.firstElementChild) {
+                switch (node.firstElementChild.innerText) {
+                    case 'Part Supply': {
+                        if (arr[0] === 'part-supply') {
+                            node.classList.add('active');
+                        }
+                        else {
+                            node.classList.remove('active');
+                        }
+
+                        break;
+                    }
+                    case 'About': {
+                        if (arr[0] === 'about') {
+                            node.classList.add('active');
+                        }
+                        else {
+                            node.classList.remove('active');
+                        }
+
+                        break;
+                    }
+                    case 'Home': {
+                        node.classList.remove('active');
+
+                        break;
+                    }
+                }
+            }
+        });
+    }
+
     slOnInit() {
-       let routeObservable = Observable(getRouteSegments());
-       routeObservable.subscribe(function(arr) {
+        let routeObservable = Observable(getRouteSegments());
+        routeObservable.subscribe(function (arr) {
             if (arr.length > 0) {
                 this.route = arr[0];
+
+                this.applyNavbarClassesForRoute(arr);
             }
             else {
                 this.route = '';
+
+                this.applyNavbarClassesForHome();
             }
-       }.bind(this));
+        }.bind(this));
     }
 
     navigate(routeString) {
         route(routeString);
 
-        switch(routeString) {
+        switch (routeString) {
             case 'about': {
                 let state = getState();
                 state.setBottomSheetOpen(true);
@@ -46,7 +103,7 @@ class NavbarComponent {
             attrs: {
                 id: 'divNavbar',
                 slUseExisting: 'true'
-            }, 
+            },
             children: [
                 markup('nav', {
                     attrs: {
