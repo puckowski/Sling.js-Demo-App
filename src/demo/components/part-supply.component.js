@@ -69,7 +69,8 @@ class PartSupplyComponent {
                 markup('div', {
                     attrs: {
                         id: 'chartDiv',
-                        slUseExisting: 'true'
+                        slUseExisting: 'true',
+                        style: 'width: 90vw;'
                     }
                 })
             ]
