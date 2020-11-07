@@ -1,5 +1,4 @@
-import { route, getRouteSegments } from '../../js/sling-router.min'
-import { markup, getState, textNode, setState } from '../../js/sling.min'
+import { markup, getState, textNode, setState, route, getRouteSegments } from '../../js/sling.min'
 import { Observable } from '../../js/sling-reactive.min'
 
 class NavbarComponent {
@@ -10,18 +9,16 @@ class NavbarComponent {
 
     applyNavbarClassesForHome() {
         document.querySelectorAll('.nav-item').forEach((node, index) => {
-            if (node.firstElementChild) {
-                switch (node.firstElementChild.innerText) {
-                    case 'Home': {
-                        node.classList.add('active');
+            switch (node.innerText) {
+                case 'Home': {
+                    node.classList.add('active');
 
-                        break;
-                    }
-                    default: {
-                        node.classList.remove('active');
+                    break;
+                }
+                default: {
+                    node.classList.remove('active');
 
-                        break;
-                    }
+                    break;
                 }
             }
         });
@@ -29,33 +26,31 @@ class NavbarComponent {
 
     applyNavbarClassesForRoute(arr) {
         document.querySelectorAll('.nav-item').forEach((node, index) => {
-            if (node.firstElementChild) {
-                switch (node.firstElementChild.innerText) {
-                    case 'Part Supply': {
-                        if (arr[0] === 'part-supply') {
-                            node.classList.add('active');
-                        }
-                        else {
-                            node.classList.remove('active');
-                        }
-
-                        break;
+            switch (node.innerText) {
+                case 'Part Supply': {
+                    if (arr[0] === 'part-supply') {
+                        node.classList.add('active');
                     }
-                    case 'About': {
-                        if (arr[0] === 'about') {
-                            node.classList.add('active');
-                        }
-                        else {
-                            node.classList.remove('active');
-                        }
-
-                        break;
-                    }
-                    case 'Home': {
+                    else {
                         node.classList.remove('active');
-
-                        break;
                     }
+
+                    break;
+                }
+                case 'About': {
+                    if (arr[0] === 'about') {
+                        node.classList.add('active');
+                    }
+                    else {
+                        node.classList.remove('active');
+                    }
+
+                    break;
+                }
+                case 'Home': {
+                    node.classList.remove('active');
+
+                    break;
                 }
             }
         });
@@ -99,7 +94,8 @@ class NavbarComponent {
     }
 
     view() {
-        return markup('div', {
+        console.log(this.route);
+        let mrk = markup('div', {
             attrs: {
                 id: 'divNavbar',
                 slUseExisting: 'true'
@@ -188,6 +184,8 @@ class NavbarComponent {
                 })
             ]
         });
+
+        return mrk;
     }
 }
 

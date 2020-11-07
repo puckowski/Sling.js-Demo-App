@@ -1,8 +1,6 @@
 import 'bootstrap';
 
-import { setState, mount } from './js/sling.min'
-import { addRoute, initialize } from './js/sling-router.min';
-import { initializeChangeDetector } from './js/sling-change.min';
+import { setState, mount, addRoute } from './js/sling.min'
 
 import NavbarComponent from './demo/components/navbar.component.js';
 import GridComponent from './demo/components/grid.component.js';
@@ -11,8 +9,6 @@ import StoreMain from './demo/store/main.store.js';
 import PartSupplyComponent from './demo/components/part-supply.component.js';
 import GridService from './demo/services/grid.service.js';
 import AboutAppComponent from './demo/components/about-app.component.js';
-
-initializeChangeDetector();
 
 let state = new StoreMain();
 setState(state);

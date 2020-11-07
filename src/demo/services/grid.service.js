@@ -1,8 +1,7 @@
 import { Grid } from '../../../node_modules/ag-grid-community/dist/ag-grid-community.min.noStyle.js';
-import { setState, getState } from '../../js/sling.min';
+import { setState, getState, route, getRouteSegments } from '../../js/sling.min';
 import { slGet } from '../../js/sling-xhr.min';
 import { Stream } from '../../js/sling-reactive.min';
-import { route, getRouteSegments } from '../../js/sling-router.min';
 
 const COLUMN_DEFINITIONS = [
     { headerName: 'Part Number', field: 'partNumber' },

@@ -1,5 +1,4 @@
-import { markup, getState, setState } from '../../js/sling.min'
-import { route, getRouteSegments } from '../../js/sling-router.min';
+import { markup, getState, setState, route, getRouteSegments } from '../../js/sling.min'
 
 class BottomSheetComponent {
 
