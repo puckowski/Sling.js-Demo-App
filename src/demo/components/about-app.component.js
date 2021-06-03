@@ -17,9 +17,17 @@ class AboutAppComponent {
                         style: 'padding:0px 1rem;'
                     },
                     children: [
-                        textNode('This is a demo SPA created using the Sling.js JavaScript framework by Daniel Puckowski.'),
+                        markup('span', {
+                            children: [
+                                textNode('This is a demo SPA created using the Sling.js JavaScript framework by Daniel Puckowski.')
+                            ]
+                        }),
                         markup('br'),
-                        textNode('Using Sling.js version ' + version()),
+                        markup('span', {
+                            children: [
+                                textNode('Using Sling.js version ' + version())
+                            ]
+                        }),
                         markup('br'),
                         markup('a', {
                             attrs: {
