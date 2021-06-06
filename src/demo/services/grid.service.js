@@ -40,14 +40,14 @@ class GridService {
             onSelectionChanged: this.onSelectionChanged.bind(this)
         };
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             let gridDiv = document.querySelector('#divGrid');
             new Grid(gridDiv, this.gridOptions);
-    
+
             let newState = getState();
             newState.setGridOptions(this.gridOptions)
             setState(newState);
-    
+
             let gridDataStream = this.getMainGridDataStream();
 
             slGet('assets/json/home-main-grid-data.json')
@@ -55,28 +55,28 @@ class GridService {
                     var httpResult = JSON.parse(resp.response);
                     gridDataStream.from(httpResult);
                     this.gridOptions.api.setRowData(gridDataStream.getData());
-    
+
                     this.navigateToRouteIfNeeded();
                 });
-    
+
             this.autoSizeAll(false);
         }.bind(this));
     }
 
     getMainGridDataStream() {
         let gridDataStream = Stream();
-            gridDataStream.transform(function(arr) {
-                return arr.map(val => {
-                    if (val.unitCostNew)
-                        val.unitCostNew = '$' + val.unitCostNew;
-                    
-                    if (val.unitCostUsed)
-                        val.unitCostUsed = '$' + val.unitCostUsed;
+        gridDataStream.transform(function (arr) {
+            return arr.map(val => {
+                if (val.unitCostNew)
+                    val.unitCostNew = '$' + val.unitCostNew;
 
-                    return val;
-                });
+                if (val.unitCostUsed)
+                    val.unitCostUsed = '$' + val.unitCostUsed;
+
+                return val;
             });
-        
+        });
+
         return gridDataStream;
     }
 
@@ -114,6 +114,18 @@ class GridService {
             state.setBottomSheetOpen(true);
             setState(state);
         }
+    }
+
+    getExportParams() {
+        let state = getState();
+
+        return {
+            skipHeader: state.getSkipColumnHeaders(),
+        };
+    }
+
+    exportData() {
+        this.gridOptions.api.exportDataAsCsv(this.getExportParams());
     }
 }
 

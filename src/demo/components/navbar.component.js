@@ -1,4 +1,4 @@
-import { markup, getState, textNode, setState, route, getRouteSegments } from '../../js/sling.min'
+import { markup, getState, textNode, setState, route, getRouteSegments, detectChanges } from '../../js/sling.min'
 import { Observable } from '../../js/sling-reactive.min'
 
 class NavbarComponent {
@@ -93,6 +93,13 @@ class NavbarComponent {
         this.route = routeString;
     }
 
+    toggleSidenav() {
+        let state = getState();
+        state.setSidenavOpen(!state.getSidenavOpen());
+        setState(state);
+        detectChanges();
+    }
+
     view() {
         console.log(this.route);
         let mrk = markup('div', {
@@ -106,6 +113,13 @@ class NavbarComponent {
                         class: 'navbar navbar-expand-lg navbar-light bg-light'
                     },
                     children: [
+                        markup('i', {
+                            attrs: {
+                                style: 'padding: 0px 0.5rem;cursor: pointer;',
+                                class: 'fa fa-bars',
+                                onclick: this.toggleSidenav
+                            }
+                        }),
                         markup('a', {
                             attrs: {
                                 class: 'navbar-brand',
