@@ -1,4 +1,4 @@
-import { getState, markup, setState, textNode } from '../../js/sling.min'
+import { getState, markup, setState, innerText } from '../../js/sling.min'
 
 class SidenavComponent {
 
@@ -53,7 +53,7 @@ class SidenavComponent {
                                 class: 'pure-button'
                             },
                             children: [
-                                textNode('Export Data')
+                                innerText('Export Data')
                             ] 
                         })
                     ]

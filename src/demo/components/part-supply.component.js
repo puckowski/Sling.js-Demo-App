@@ -1,5 +1,5 @@
 import SelectedPartHeaderComponent from "./selected-part-header.component";
-import { markup } from '../../js/sling.min'
+import { getState, markup } from '../../js/sling.min'
 
 const MOCK_DATA_MAX_VALUE_EXCLUSIVE = 101;
 const MOCK_DATA_MONTH_RANGE = 24;
@@ -57,6 +57,9 @@ class PartSupplyComponent {
         if (document.getElementById('chartDiv')) {
             Plotly.newPlot('chartDiv', this.data, { }, { responsive: true, displaylogo: false });
         }
+
+        const bench = new Date() - getState().getBenchTime();
+        console.log(bench);
     }
 
     view() {

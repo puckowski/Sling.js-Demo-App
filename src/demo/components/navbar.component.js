@@ -1,4 +1,4 @@
-import { markup, getState, textNode, setState, route, getRouteSegments, detectChanges } from '../../js/sling.min'
+import { markup, getState, innerText, setState, route, getRouteSegments, detectChanges } from '../../js/sling.min'
 import { Observable } from '../../js/sling-reactive.min'
 
 class NavbarComponent {
@@ -126,7 +126,7 @@ class NavbarComponent {
                                 href: '#'
                             },
                             children: [
-                                textNode('Demo App')
+                                innerText('Demo App')
                             ]
                         }),
                         markup('button', {
@@ -166,7 +166,7 @@ class NavbarComponent {
                                                 style: 'cursor:pointer;'
                                             },
                                             children: [
-                                                textNode('Home')
+                                                innerText('Home')
                                             ]
                                         }),
                                         markup('a', {
@@ -176,7 +176,7 @@ class NavbarComponent {
                                                 style: 'cursor:pointer;'
                                             },
                                             children: [
-                                                textNode('Part Supply')
+                                                innerText('Part Supply')
                                             ]
                                         }),
                                         markup('a', {
@@ -187,7 +187,7 @@ class NavbarComponent {
                                                 style: 'cursor:pointer;'
                                             },
                                             children: [
-                                                textNode('About')
+                                                innerText('About')
                                             ]
                                         })
                                     ]

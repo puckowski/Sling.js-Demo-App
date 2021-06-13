@@ -10,8 +10,13 @@ class StoreMain {
         this.gridOptions = null;
         this.skipColumnHeaders = false;
         this.gridService = null;
+        this.benchTime = new Date();
     }
 
+    getBenchTime() {
+        return this.benchTime;
+    }
+    
     getGridService() {
         return this.gridService;
     }
