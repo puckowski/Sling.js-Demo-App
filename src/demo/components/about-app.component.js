@@ -1,4 +1,4 @@
-import { markup, innerText, version } from '../../js/sling.min'
+import { markup, textNode, version } from '../../js/sling.min'
 
 class AboutAppComponent {
 
@@ -19,13 +19,13 @@ class AboutAppComponent {
                     children: [
                         markup('span', {
                             children: [
-                                innerText('This is a demo SPA created using the Sling.js JavaScript framework by Daniel Puckowski.')
+                                textNode('This is a demo SPA created using the Sling.js JavaScript framework by Daniel Puckowski.')
                             ]
                         }),
                         markup('br'),
                         markup('span', {
                             children: [
-                                innerText('Using Sling.js version ' + version())
+                                textNode('Using Sling.js version ' + version())
                             ]
                         }),
                         markup('br'),
@@ -35,7 +35,7 @@ class AboutAppComponent {
                                 target: '_blank'
                             },
                             children: [
-                                innerText('Sling.js on GitHub')
+                                textNode('Sling.js on GitHub')
                             ]
                         })
                     ]

@@ -1,4 +1,4 @@
-import { markup, getState, innerText } from '../../js/sling.min'
+import { markup, getState, textNode } from '../../js/sling.min'
 
 class SelectedPartHeaderComponent {
 
@@ -19,7 +19,7 @@ class SelectedPartHeaderComponent {
                         style: 'padding:0px 1rem;font-size:24px;'
                     },
                     children: [
-                        innerText(state.getSelectedRow().partNumber + ' - ' + state.getSelectedRow().nomenclature)
+                        textNode(state.getSelectedRow().partNumber + ' - ' + state.getSelectedRow().nomenclature)
                     ]
                 })
             ]

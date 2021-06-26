@@ -1,4 +1,4 @@
-import { markup, getState, innerText, setState, route, getRouteSegments, detectChanges } from '../../js/sling.min'
+import { markup, getState, textNode, setState, route, getRouteSegments, detectChanges } from '../../js/sling.min'
 import { Observable } from '../../js/sling-reactive.min'
 
 class NavbarComponent {
@@ -9,7 +9,7 @@ class NavbarComponent {
 
     applyNavbarClassesForHome() {
         document.querySelectorAll('.nav-item').forEach((node, index) => {
-            switch (node.innerText) {
+            switch (node.textNode) {
                 case 'Home': {
                     node.classList.add('active');
 
@@ -26,7 +26,7 @@ class NavbarComponent {
 
     applyNavbarClassesForRoute(arr) {
         document.querySelectorAll('.nav-item').forEach((node, index) => {
-            switch (node.innerText) {
+            switch (node.textNode) {
                 case 'Part Supply': {
                     if (arr[0] === 'part-supply') {
                         node.classList.add('active');
@@ -105,7 +105,6 @@ class NavbarComponent {
         let mrk = markup('div', {
             attrs: {
                 id: 'divNavbar',
-                slUseExisting: 'true'
             },
             children: [
                 markup('nav', {
@@ -126,7 +125,7 @@ class NavbarComponent {
                                 href: '#'
                             },
                             children: [
-                                innerText('Demo App')
+                                textNode('Demo App')
                             ]
                         }),
                         markup('button', {
@@ -150,7 +149,8 @@ class NavbarComponent {
                         markup('div', {
                             attrs: {
                                 class: 'collapse navbar-collapse',
-                                id: 'navbarNavAltMarkup'
+                                id: 'navbarNavAltMarkup',
+                                slNoChanges: 'true'
                             },
                             children: [
                                 markup('div', {
@@ -166,7 +166,7 @@ class NavbarComponent {
                                                 style: 'cursor:pointer;'
                                             },
                                             children: [
-                                                innerText('Home')
+                                                textNode('Home')
                                             ]
                                         }),
                                         markup('a', {
@@ -176,7 +176,7 @@ class NavbarComponent {
                                                 style: 'cursor:pointer;'
                                             },
                                             children: [
-                                                innerText('Part Supply')
+                                                textNode('Part Supply')
                                             ]
                                         }),
                                         markup('a', {
@@ -187,7 +187,7 @@ class NavbarComponent {
                                                 style: 'cursor:pointer;'
                                             },
                                             children: [
-                                                innerText('About')
+                                                textNode('About')
                                             ]
                                         })
                                     ]

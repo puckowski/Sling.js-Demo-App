@@ -1,4 +1,4 @@
-import { getState, markup, setState, innerText } from '../../js/sling.min'
+import { getState, markup, setState, textNode } from '../../js/sling.min'
 
 class ExportDialogComponent {
 
@@ -41,7 +41,7 @@ class ExportDialogComponent {
                     children: [
                         markup('h3', {
                             children: [
-                                innerText('Export Grid Data')
+                                textNode('Export Grid Data')
                             ]
                         })
                     ]
@@ -82,7 +82,7 @@ class ExportDialogComponent {
                                         for: 'skipColumnHeaders'
                                     },
                                     children: [
-                                        innerText('Skip Column Headers')
+                                        textNode('Skip Column Headers')
                                     ]
                                 })
                             ]
@@ -99,7 +99,7 @@ class ExportDialogComponent {
                                         class: 'pure-button'
                                     },
                                     children: [
-                                        innerText('Export')
+                                        textNode('Export')
                                     ] 
                                 })
                             ]
