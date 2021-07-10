@@ -94,15 +94,28 @@ class NavbarComponent {
     }
 
     toggleSidenav() {
-        let state = getState();
-        state.setSidenavOpen(!state.getSidenavOpen());
-        setState(state);
-        detectChanges();
+        const routeSegments = getRouteSegments();
+
+        if (routeSegments && routeSegments[0] !== 'login') {
+            let state = getState();
+            state.setSidenavOpen(!state.getSidenavOpen());
+            setState(state);
+            detectChanges();
+        }
+    }
+
+    isLoginRoute() {
+        const routeSegments = getRouteSegments();
+
+        if (routeSegments && routeSegments[0] === 'login') {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     view() {
-        console.log(this.route);
-        let mrk = markup('div', {
+        return markup('div', {
             attrs: {
                 id: 'divNavbar',
             },
@@ -153,53 +166,53 @@ class NavbarComponent {
                                 slNoChanges: 'true'
                             },
                             children: [
-                                markup('div', {
-                                    attrs: {
-                                        class: 'navbar-nav'
-                                    },
-                                    children: [
-                                        markup('a', {
-                                            attrs: {
-                                                ...this.route === '' && { class: 'nav-item nav-link active' },
-                                                ...this.route !== '' && { class: 'nav-item nav-link' },
-                                                onclick: this.navigate.bind(this, ''),
-                                                style: 'cursor:pointer;'
-                                            },
-                                            children: [
-                                                textNode('Home')
-                                            ]
-                                        }),
-                                        markup('a', {
-                                            attrs: {
-                                                ...this.route === 'part-supply' && { class: 'nav-item nav-link active' },
-                                                ...this.route !== 'part-supply' && { class: 'nav-item nav-link' },
-                                                style: 'cursor:pointer;'
-                                            },
-                                            children: [
-                                                textNode('Part Supply')
-                                            ]
-                                        }),
-                                        markup('a', {
-                                            attrs: {
-                                                ...this.route === 'about' && { class: 'nav-item nav-link active' },
-                                                ...this.route !== 'about' && { class: 'nav-item nav-link' },
-                                                onclick: this.navigate.bind(this, 'about'),
-                                                style: 'cursor:pointer;'
-                                            },
-                                            children: [
-                                                textNode('About')
-                                            ]
-                                        })
-                                    ]
-                                })
+                                ...(this.isLoginRoute() === false ? [
+                                    markup('div', {
+                                        attrs: {
+                                            class: 'navbar-nav'
+                                        },
+                                        children: [
+                                            markup('a', {
+                                                attrs: {
+                                                    ...this.route === '' && { class: 'nav-item nav-link active' },
+                                                    ...this.route !== '' && { class: 'nav-item nav-link' },
+                                                    onclick: this.navigate.bind(this, ''),
+                                                    style: 'cursor:pointer;'
+                                                },
+                                                children: [
+                                                    textNode('Home')
+                                                ]
+                                            }),
+                                            markup('a', {
+                                                attrs: {
+                                                    ...this.route === 'part-supply' && { class: 'nav-item nav-link active' },
+                                                    ...this.route !== 'part-supply' && { class: 'nav-item nav-link' },
+                                                    style: 'cursor:pointer;'
+                                                },
+                                                children: [
+                                                    textNode('Part Supply')
+                                                ]
+                                            }),
+                                            markup('a', {
+                                                attrs: {
+                                                    ...this.route === 'about' && { class: 'nav-item nav-link active' },
+                                                    ...this.route !== 'about' && { class: 'nav-item nav-link' },
+                                                    onclick: this.navigate.bind(this, 'about'),
+                                                    style: 'cursor:pointer;'
+                                                },
+                                                children: [
+                                                    textNode('About')
+                                                ]
+                                            })
+                                        ]
+                                    })
+                                ] : []),
                             ]
                         })
                     ]
                 })
             ]
         });
-
-        return mrk;
     }
 }
 

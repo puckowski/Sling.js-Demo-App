@@ -1,4 +1,4 @@
-import { getState, markup, setState, textNode } from '../../js/sling.min'
+import { getState, markup, route, setState, textNode } from '../../js/sling.min'
 
 class SidenavComponent {
 
@@ -16,6 +16,15 @@ class SidenavComponent {
         let state = getState();
         state.setExportOpen(!state.getExportOpen());
         setState(state);
+    }
+
+    logout() {
+        let state = getState();
+        state.reset();
+        state.setInitialGridDraw(true);
+        setState(state);
+
+        route('login');
     }
 
     view() {
@@ -54,6 +63,16 @@ class SidenavComponent {
                             },
                             children: [
                                 textNode('Export Data')
+                            ] 
+                        }),
+                        markup('button', {
+                            attrs: {
+                                style: 'width: 100%;',
+                                onclick: this.logout,
+                                class: 'pure-button'
+                            },
+                            children: [
+                                textNode('Logout')
                             ] 
                         })
                     ]

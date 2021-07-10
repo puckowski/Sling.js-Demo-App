@@ -6,11 +6,30 @@ class StoreMain {
         this.bottomSheetSubject = BehaviorSubject(false);
         this.sidenavSubject = BehaviorSubject(false);
         this.exportSubject = BehaviorSubject(false);
+        this.initialGridDraw = BehaviorSubject(true);
         this.selectedRow = null;
         this.gridOptions = null;
         this.skipColumnHeaders = false;
         this.gridService = null;
         this.benchTime = new Date();
+    }
+
+    reset() {
+        this.setBottomSheetOpen(false);
+        this.setSidenavOpen(false);
+        this.setExportOpen(false);
+    }
+
+    getInitialGridDrawSubject() {
+        return this.initialGridDraw;
+    }
+
+    setInitialGridDraw(newState) {
+        this.initialGridDraw.next(newState);
+    }
+
+    getInitialGridDraw() {
+        return this.initialGridDraw.getData() === true;
     }
 
     getBenchTime() {

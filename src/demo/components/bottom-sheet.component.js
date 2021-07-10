@@ -7,11 +7,12 @@ class BottomSheetComponent {
     }
 
     slOnInit() {
-        getState().getBottomSheetSubject().subscribe(function(newSheetState) {
+        getState().getBottomSheetSubject().clearSubscriptions();
+        getState().getBottomSheetSubject().subscribe(function (newSheetState) {
             if (newSheetState !== this.oldSheetState) {
                 let segments = getRouteSegments();
 
-                switch(segments[0]) {
+                switch (segments[0]) {
                     case 'part-supply': {
                         route('part-supply/' + getState().getSelectedRow().partNumber);
 
@@ -23,7 +24,7 @@ class BottomSheetComponent {
                         break;
                     }
                 }
-                
+
                 this.oldSheetState = newSheetState;
             }
         }.bind(this));
