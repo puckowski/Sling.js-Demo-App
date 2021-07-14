@@ -1,5 +1,4 @@
-import { Observable } from '../../js/sling-reactive.min';
-import { getRouteSegments, getState, markup, setState } from '../../js/sling.min'
+import { getState, markup, setState } from '../../js/sling.min'
 
 class GridComponent {
 

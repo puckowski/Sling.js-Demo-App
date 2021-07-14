@@ -7,13 +7,6 @@ import SidenavComponent from './sidenav.component';
 class HomeComponent {
 
     constructor() {
-        this.bottomSheetComp = new BottomSheetComponent();
-        this.gridComp = new GridComponent();
-    }
-
-    slOnInit() {
-        this.bottomSheetComp.slOnInit();
-        this.gridComp.slOnInit();
     }
 
     view() {
@@ -22,9 +15,9 @@ class HomeComponent {
                 id: 'divRouterOutlet'
             },
             children: [
-                this.gridComp.view(),
+                new GridComponent(),
                 new SidenavComponent().view(),
-                this.bottomSheetComp.view(),
+                new BottomSheetComponent(),
                 new ExportDialogComponent().view()
             ]
         });

@@ -125,13 +125,15 @@ class NavbarComponent {
                         class: 'navbar navbar-expand-lg navbar-light bg-light'
                     },
                     children: [
-                        markup('i', {
-                            attrs: {
-                                style: 'padding: 0px 0.5rem;cursor: pointer;',
-                                class: 'fa fa-bars',
-                                onclick: this.toggleSidenav
-                            }
-                        }),
+                        ...(this.isLoginRoute() === false ? [
+                            markup('i', {
+                                attrs: {
+                                    style: 'padding: 0px 0.5rem;cursor: pointer;',
+                                    class: 'fa fa-bars',
+                                    onclick: this.toggleSidenav
+                                }
+                            })
+                        ] : []),
                         markup('a', {
                             attrs: {
                                 class: 'navbar-brand',
