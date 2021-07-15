@@ -13,7 +13,7 @@ class AuthenticationService {
         const authService = state.getAuthenticationService();
         const authObj = authService.getAuthenticationCookie();
         
-        if (authObj !== null && authObj !== undefined) {
+        if (authObj !== null && authObj !== undefined && authObj !== '') {
             return true;
         } 
 
