@@ -1,4 +1,5 @@
 import { BehaviorSubject } from '../../js/sling-reactive.min';
+import AuthenticationService from '../services/authentication.service';
 
 class StoreMain {
 
@@ -12,12 +13,24 @@ class StoreMain {
         this.skipColumnHeaders = false;
         this.gridService = null;
         this.benchTime = new Date();
+        this.authService = new AuthenticationService();
+        this.isInitialRoute = true;
     }
 
     reset() {
         this.setBottomSheetOpen(false);
         this.setSidenavOpen(false);
         this.setExportOpen(false);
+    }
+
+    getIsInitialRoute() {
+        const originalState = this.isInitialRoute;
+        this.isInitialRoute = false;
+        return originalState;
+    }
+
+    getAuthenticationService() {
+        return this.authService;
     }
 
     getInitialGridDrawSubject() {
@@ -35,7 +48,7 @@ class StoreMain {
     getBenchTime() {
         return this.benchTime;
     }
-    
+
     getGridService() {
         return this.gridService;
     }

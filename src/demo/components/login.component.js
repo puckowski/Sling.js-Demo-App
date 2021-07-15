@@ -1,5 +1,5 @@
 import { FormControl } from '../../js/sling-reactive.min';
-import { getState, markup, route, setState, textNode } from '../../js/sling.min'
+import { getRouteSegments, getState, markup, route, setState, textNode } from '../../js/sling.min'
 import GridService from '../services/grid.service';
 
 class LoginComponent {
@@ -19,6 +19,8 @@ class LoginComponent {
         this.passwordControl.setValue('');
         this.usernameControl.setPristine();
         this.passwordControl.setPristine();
+
+        this.loginIfAuthenticated();
     }
 
     initializeValidators() {
@@ -49,18 +51,34 @@ class LoginComponent {
         this.passwordControl.setValue(event.target.value);
     }
 
+    loginIfAuthenticated() {
+        const state = getState();
+        const authService = state.getAuthenticationService();
+        
+        if (authService.getIsAuthenticated()) {
+            s.DETACHED_SET_TIMEOUT(() => {
+                this.login();
+            }, 0);
+        }
+    }
+
+    authenticateWithService() {
+        const state = getState();
+        const authService = state.getAuthenticationService();
+        authService.setAuthenticationCookie({ user: 'admin', password: 'password' });
+    }
+
+    login() {
+        route('');
+    }
+
     onLogin() {
         const usernameValid = this.usernameControl.getValid();
         const passwordValid = this.usernameControl.getValid();
 
         if (usernameValid && passwordValid) {
-            route('');
-
-            const state = getState();
-            let gridService = new GridService();
-            gridService.init();
-            state.setGridService(gridService);
-            setState(state);
+            this.authenticateWithService();
+            this.login();
         }
 
         if (!usernameValid) {

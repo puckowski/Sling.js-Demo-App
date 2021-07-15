@@ -8,6 +8,7 @@ class SelectedPartHeaderComponent {
 
     view() {
         let state = getState();
+        const selectedRow = state.getSelectedRow();
 
         return markup('div', {
             attrs: {
@@ -19,7 +20,7 @@ class SelectedPartHeaderComponent {
                         style: 'padding:0px 1rem;font-size:24px;'
                     },
                     children: [
-                        textNode(state.getSelectedRow().partNumber + ' - ' + state.getSelectedRow().nomenclature)
+                        textNode(selectedRow ? selectedRow.partNumber + ' - ' + selectedRow.nomenclature : '')
                     ]
                 })
             ]
