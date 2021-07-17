@@ -28,9 +28,9 @@ const onInitialRoute = () => {
     }
 }
 
-addRoute('part-supply/:partNumber', { component: new PartSupplyComponent(), root: 'divSheetContent', onBeforeRoute: onInitialRoute, authGuard: demoAuthGuard, authFail: { route: 'login', params: {} } });
-addRoute('about', { component: new AboutAppComponent(), root: 'divSheetContent', authGuard: demoAuthGuard, onBeforeRoute: onInitialRoute, authFail: { route: 'login', params: {} } });
-addRoute('', { component: new HomeComponent(), root: 'divRouterOutlet', authGuard: demoAuthGuard, authFail: { route: 'login', params: {} } });
+addRoute('part-supply/:partNumber', { component: new PartSupplyComponent(), root: 'divSheetContent', onBeforeRoute: onInitialRoute, onActivationCheck: demoAuthGuard, onActivationFail: { route: 'login', params: {} } });
+addRoute('about', { component: new AboutAppComponent(), root: 'divSheetContent', onActivationCheck: demoAuthGuard, onBeforeRoute: onInitialRoute, onActivationFail: { route: 'login', params: {} } });
+addRoute('', { component: new HomeComponent(), root: 'divRouterOutlet', onActivationCheck: demoAuthGuard, onActivationFail: { route: 'login', params: {} } });
 addRoute('login', { component: new LoginComponent(), root: 'divRouterOutlet' });
 
 route(getRoute());
