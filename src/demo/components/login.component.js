@@ -1,6 +1,5 @@
 import { FormControl } from '../../js/sling-reactive.min';
-import { getRouteSegments, getState, markup, route, setState, textNode } from '../../js/sling.min'
-import GridService from '../services/grid.service';
+import { getState, markup, route, textNode } from '../../js/sling.min'
 
 class LoginComponent {
 
@@ -40,7 +39,16 @@ class LoginComponent {
                 return { required: 'Password is required' }
             }
         }
-        this.passwordControl.setValidators([hasPassword]);
+
+        const passwordLength = (value) => {
+            if (value && value.length < 5) {
+                return { minLength: 'Password must be at least 5 characters' }
+            } else {
+                return null;
+            }
+        }
+
+        this.passwordControl.setValidators([hasPassword, passwordLength]);
     }
 
     updateUsername(event) {
@@ -54,7 +62,7 @@ class LoginComponent {
     loginIfAuthenticated() {
         const state = getState();
         const authService = state.getAuthenticationService();
-        
+
         if (authService.getIsAuthenticated()) {
             s.DETACHED_SET_TIMEOUT(() => {
                 this.login();
@@ -74,7 +82,7 @@ class LoginComponent {
 
     onLogin() {
         const usernameValid = this.usernameControl.getValid();
-        const passwordValid = this.usernameControl.getValid();
+        const passwordValid = this.passwordControl.getValid();
 
         if (usernameValid && passwordValid) {
             this.authenticateWithService();
