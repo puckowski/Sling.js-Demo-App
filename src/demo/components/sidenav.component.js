@@ -1,4 +1,4 @@
-import { getState, markup, route, setState, textNode } from '../../js/sling.min'
+import { detachDetector, getState, markup, route, setState, textNode } from '../../js/sling.min'
 
 class SidenavComponent {
 
@@ -23,6 +23,11 @@ class SidenavComponent {
         state.reset();
         state.setInitialGridDraw(true);
         setState(state);
+
+        const authService = state.getAuthenticationService();
+        authService.setAuthenticationCookie('');
+        
+        detachDetector('divSheetContent');
 
         route('login');
     }

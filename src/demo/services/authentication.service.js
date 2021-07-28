@@ -12,10 +12,10 @@ class AuthenticationService {
         const state = getState();
         const authService = state.getAuthenticationService();
         const authObj = authService.getAuthenticationCookie();
-        
+
         if (authObj !== null && authObj !== undefined && authObj !== '') {
             return true;
-        } 
+        }
 
         return false;
     }
@@ -25,7 +25,11 @@ class AuthenticationService {
     }
 
     setAuthenticationCookie(authObj) {
-        this.setCookie(COOKIE_AUTHENTICATION_DATA, JSON.stringify(authObj), 31);
+        if (typeof authObj === 'string') {
+            this.setCookie(COOKIE_AUTHENTICATION_DATA, authObj, 31);
+        } else {
+            this.setCookie(COOKIE_AUTHENTICATION_DATA, JSON.stringify(authObj), 31);
+        }
     }
 
     setCookie(cname, cvalue, exdays) {

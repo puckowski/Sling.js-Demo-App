@@ -41,24 +41,27 @@ class GridService {
         };
 
         let gridDiv = document.querySelector('#divGrid');
-        new Grid(gridDiv, this.gridOptions);
 
-        let newState = getState();
-        newState.setGridOptions(this.gridOptions)
-        setState(newState);
+        if (gridDiv) {
+            new Grid(gridDiv, this.gridOptions);
 
-        let gridDataStream = this.getMainGridDataStream();
+            let newState = getState();
+            newState.setGridOptions(this.gridOptions)
+            setState(newState);
 
-        slGet('assets/json/home-main-grid-data.json')
-            .then(resp => {
-                var httpResult = JSON.parse(resp.response);
-                gridDataStream.from(httpResult);
-                this.gridOptions.api.setRowData(gridDataStream.getData());
+            let gridDataStream = this.getMainGridDataStream();
 
-                this.navigateToRouteIfNeeded();
-            });
+            slGet('assets/json/home-main-grid-data.json')
+                .then(resp => {
+                    var httpResult = JSON.parse(resp.response);
+                    gridDataStream.from(httpResult);
+                    this.gridOptions.api.setRowData(gridDataStream.getData());
 
-        this.autoSizeAll(false);
+                    this.navigateToRouteIfNeeded();
+                });
+
+            this.autoSizeAll(false);
+        }
     }
 
     getMainGridDataStream() {

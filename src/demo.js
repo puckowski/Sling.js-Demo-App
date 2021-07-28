@@ -32,5 +32,7 @@ addRoute('part-supply/:partNumber', { component: new PartSupplyComponent(), root
 addRoute('about', { component: new AboutAppComponent(), root: 'divSheetContent', onActivationCheck: demoAuthGuard, onBeforeRoute: onInitialRoute, onActivationFail: { route: 'login', params: {} } });
 addRoute('', { component: new HomeComponent(), root: 'divRouterOutlet', onActivationCheck: demoAuthGuard, onActivationFail: { route: 'login', params: {} } });
 addRoute('login', { component: new LoginComponent(), root: 'divRouterOutlet' });
+addRoute('.*', { component: new LoginComponent(), root: 'divRouterOutlet' });
 
-route(getRoute());
+const currentRoute = getRoute();
+currentRoute ? route(currentRoute) : route('');
