@@ -15,6 +15,7 @@ class StoreMain {
         this.benchTime = new Date();
         this.authService = new AuthenticationService();
         this.isInitialRoute = true;
+        this.exportDelimiter = ',';
     }
 
     reset() {
@@ -55,6 +56,14 @@ class StoreMain {
 
     setGridService(newService) {
         this.gridService = newService;
+    }
+
+    getExportDelimiter() {
+        return this.exportDelimiter;
+    }
+
+    setExportDelimiter(newDelimiter) {
+        this.exportDelimiter = newDelimiter;
     }
 
     getSkipColumnHeaders() {

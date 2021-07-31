@@ -122,6 +122,7 @@ class GridService {
 
         return {
             skipHeader: state.getSkipColumnHeaders(),
+            columnSeparator: state.getExportDelimiter()
         };
     }
 

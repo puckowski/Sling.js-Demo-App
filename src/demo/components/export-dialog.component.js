@@ -24,8 +24,15 @@ class ExportDialogComponent {
         setState(state);
     }
 
+    changeDelimiter(event) {
+        let state = getState();
+        state.setExportDelimiter(event.target.value);
+        setState(state);
+    }
+
     view() {
         let state = getState();
+        const currentDelimiter = state.getExportDelimiter();
 
         return markup('div', {
             attrs: {
@@ -85,6 +92,49 @@ class ExportDialogComponent {
                                         textNode('Skip Column Headers')
                                     ]
                                 })
+                            ]
+                        }),
+                        markup('div', {
+                            attrs: {
+                                style: 'display: block;'
+                            },
+                            children: [
+                                markup('label', {
+                                    attrs: {
+                                        for: 'exportDelimiter',
+                                        style: 'margin-right: 0.5rem;'
+                                    },
+                                    children: [
+                                        textNode('Column Delimiter')
+                                    ]
+                                }),
+                                markup('select', {
+                                    attrs: {
+                                        name: 'exportDelimiter',
+                                        onchange: this.changeDelimiter.bind(this)
+                                    },
+                                    children: [
+                                        markup('option', {
+                                            attrs: {
+                                                value: ',',
+                                                ...currentDelimiter === ',' && { 'selected': true }
+                                            },
+                                            children: [
+                                                textNode('Comma')
+                                            ]
+                                        }),
+                                        markup('option', {
+                                            attrs: {
+                                                value: '|',
+                                                ...currentDelimiter === '|' && { 'selected': true }
+                                            },
+                                            children: [
+                                                textNode('Pipe')
+                                            ]
+                                        })
+                                    ]
+                                }),
+                                
                             ]
                         }),
                         markup('div', {

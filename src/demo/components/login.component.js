@@ -81,6 +81,9 @@ class LoginComponent {
     }
 
     onLogin() {
+        this.usernameMessage = '';
+        this.passwordMessage = '';
+        
         const usernameValid = this.usernameControl.getValid();
         const passwordValid = this.passwordControl.getValid();
 
