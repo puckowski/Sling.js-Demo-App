@@ -1,5 +1,5 @@
 import { FormControl } from '../../js/sling-reactive.min';
-import { getState, markup, route, textNode } from '../../js/sling.min'
+import { getState, markup, route, setState, textNode } from '../../js/sling.min'
 
 class LoginComponent {
 
@@ -83,7 +83,7 @@ class LoginComponent {
     onLogin() {
         this.usernameMessage = '';
         this.passwordMessage = '';
-        
+
         const usernameValid = this.usernameControl.getValid();
         const passwordValid = this.passwordControl.getValid();
 

@@ -24,6 +24,10 @@ class StoreMain {
         this.setExportOpen(false);
     }
 
+    setIsInitialRoute(newInitialRoute) {
+        this.isInitialRoute = newInitialRoute;
+    }
+    
     getIsInitialRoute() {
         const originalState = this.isInitialRoute;
         this.isInitialRoute = false;

@@ -29,6 +29,10 @@ class GridService {
     }
 
     init() {
+        const state = getState();
+        state.setIsInitialRoute(false);
+        setState(state);
+
         this.gridOptions = {
             defaultColDef: {
                 resizable: true,
