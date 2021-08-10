@@ -165,7 +165,7 @@ class NavbarComponent {
                             attrs: {
                                 class: 'collapse navbar-collapse',
                                 id: 'navbarNavAltMarkup',
-                                slNoChanges: 'true'
+                                slnochanges: 'true'
                             },
                             children: [
                                 ...(this.isLoginRoute() === false ? [

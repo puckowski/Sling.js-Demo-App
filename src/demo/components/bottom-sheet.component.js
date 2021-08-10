@@ -64,7 +64,7 @@ class BottomSheetComponent {
                     attrs: {
                         id: 'divSheetContent',
                         class: 'bottom-sheet-content',
-                        slUseExisting: 'true'
+                        sluseexisting: 'true'
                     }
                 })
             ]

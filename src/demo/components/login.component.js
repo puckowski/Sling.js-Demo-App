@@ -147,7 +147,8 @@ class LoginComponent {
                                 markup('input', {
                                     attrs: {
                                         style: 'width: 80%;',
-                                        oninput: this.updateUsername.bind(this)
+                                        oninput: this.updateUsername.bind(this),
+                                        value: this.usernameControl.getValue()
                                     }
                                 })
                             ]
@@ -176,7 +177,8 @@ class LoginComponent {
                                 markup('input', {
                                     attrs: {
                                         style: 'width: 80%;',
-                                        oninput: this.updatePassword.bind(this)
+                                        oninput: this.updatePassword.bind(this),
+                                        value: this.passwordControl.getValue()
                                     }
                                 })
                             ]

@@ -22,6 +22,7 @@ class SidenavComponent {
         let state = getState();
         state.reset();
         state.setInitialGridDraw(true);
+        state.setIsInitialRoute(true);
         setState(state);
 
         const authService = state.getAuthenticationService();

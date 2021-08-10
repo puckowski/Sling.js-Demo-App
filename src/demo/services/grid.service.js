@@ -51,41 +51,44 @@ class GridService {
 
     init() {
         const state = getState();
+        const isInitialRoute = state.getIsInitialRoute();
         state.setIsInitialRoute(false);
         setState(state);
 
-        this.gridOptions = {
-            defaultColDef: {
-                resizable: true,
-                sortable: true,
-                filter: true
-            },
-            columnDefs: this.COLUMN_DEFINITIONS,
-            rowSelection: 'single',
-            onSelectionChanged: this.onSelectionChanged.bind(this)
-        };
+        if (isInitialRoute) {
+            this.gridOptions = {
+                defaultColDef: {
+                    resizable: true,
+                    sortable: true,
+                    filter: true
+                },
+                columnDefs: this.COLUMN_DEFINITIONS,
+                rowSelection: 'single',
+                onSelectionChanged: this.onSelectionChanged.bind(this)
+            };
 
-        let gridDiv = document.querySelector('#divGrid');
+            let gridDiv = document.querySelector('#divGrid');
 
-        if (gridDiv) {
-            new Grid(gridDiv, this.gridOptions);
+            if (gridDiv) {
+                new Grid(gridDiv, this.gridOptions);
 
-            let newState = getState();
-            newState.setGridOptions(this.gridOptions)
-            setState(newState);
+                let newState = getState();
+                newState.setGridOptions(this.gridOptions)
+                setState(newState);
 
-            let gridDataStream = this.getMainGridDataStream();
+                let gridDataStream = this.getMainGridDataStream();
 
-            slGet('assets/json/home-main-grid-data.json')
-                .then(resp => {
-                    var httpResult = JSON.parse(resp.response);
-                    gridDataStream.from(httpResult);
-                    this.gridOptions.api.setRowData(gridDataStream.getData());
+                slGet('assets/json/home-main-grid-data.json')
+                    .then(resp => {
+                        var httpResult = JSON.parse(resp.response);
+                        gridDataStream.from(httpResult);
+                        this.gridOptions.api.setRowData(gridDataStream.getData());
 
-                    this.navigateToRouteIfNeeded();
-                });
+                        this.navigateToRouteIfNeeded();
+                    });
 
-            this.autoSizeAll(false);
+                this.autoSizeAll(false);
+            }
         }
     }
 

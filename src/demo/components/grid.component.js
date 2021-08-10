@@ -24,7 +24,7 @@ class GridComponent {
                 id: 'divGrid',
                 style: 'height: calc(100% - 56px);width:100%;',
                 class: 'ag-theme-balham',
-                ...initialDraw === false && { slUseExisting: true },
+                ...initialDraw === false && { sluseexisting: true },
             }
         });
     }

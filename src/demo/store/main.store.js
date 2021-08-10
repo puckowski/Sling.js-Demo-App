@@ -30,7 +30,6 @@ class StoreMain {
     
     getIsInitialRoute() {
         const originalState = this.isInitialRoute;
-        this.isInitialRoute = false;
         return originalState;
     }
 
