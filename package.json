@@ -48,7 +48,7 @@
     "plotly.js": "^1.51.2",
     "plotly.js-dist": "^1.51.2",
     "popper.js": "^1.16.0",
-    "terser": "^4.4.0",
+    "terser": "^4.8.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
